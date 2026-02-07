@@ -1,0 +1,285 @@
+/* Neon line rounded animation(New) */
+:root {
+    --tab-gradient: #407cff 318deg, #da8bff 1turn;
+    --size: 1.3px;
+    --duration: 3s;
+    --general-gradient-secondary: #fcb564, #ff65f2, #ff69cf;
+}
+.tab-border-top-container {
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: var(--size);
+    width: 100% !important;
+    height: calc(100% - 1px) !important;
+    background-color: transparent !important;
+    border-radius: inherit;
+    box-sizing: border-box;
+}
+.tab-border-top-container:before {
+    content: "";
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: spinner var(--duration) linear infinite;
+    background: conic-gradient(
+            from 0deg at 50% 51.35%,
+            rgba(185, 215, 243, 0) 0deg,
+            rgba(185, 215, 243, 0) 289.4deg,
+            var(--tab-gradient)
+        ),
+        conic-gradient(
+            from 180deg at 50% 51.35%,
+            rgba(185, 215, 243, 0) 0deg,
+            rgba(185, 215, 243, 0) 287.46deg,
+            var(--tab-gradient)
+        );
+    border-radius: inherit;
+}
+@keyframes spinner {
+    100% {
+        transform: translate(-50%, -50%) rotate(1turn);
+    }
+}
+
+.tab {
+    overflow: hidden;
+}
+.tab.active {
+    border-radius: 100px !important;
+    box-shadow: inset 0 1px 1px 0 rgba(199, 211, 234, 0.12),
+        inset 0 24px 48px 0 rgba(199, 211, 234, 0.05),
+        0 24px 32px 0 rgba(6, 6, 14, 0.7);
+    isolation: isolate;
+}
+
+/* Tùy biến con trỏ */
+.cursors-layer .cursor {
+    background-image: linear-gradient(
+        -45deg,
+        #0cebeb,
+        #20e3b2,
+        #29ffc6,
+        #0cebeb
+    ) !important;
+    animation: gradientAnimation 1.5s linear infinite;
+}
+
+/* Custom phông chữ (mtk) */
+.mtk14 {
+    -webkit-font-smoothing: auto;
+    font-family: "Dank Mono", monospace;
+    font-style: italic;
+}
+
+.mtk20 {
+    -webkit-font-smoothing: auto;
+    font-family: "Fz Poppins Regular", sans-serif;
+    font-weight: bolder;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mtk5 {
+    -webkit-font-smoothing: auto;
+    font-family: "Fz Poppins Regular", sans-serif;
+    font-weight: bold;
+}
+
+.mtk1 {
+    -webkit-font-smoothing: auto;
+    font-family: "Fz Poppins Regular", sans-serif;
+    font-weight: bolder;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mtk11.bracket-highlighting-2 {
+    -webkit-font-smoothing: auto;
+    font-family: "Fz Poppins Regular", sans-serif;
+    font-weight: bolder;
+}
+
+.mtk4 {
+    font-weight: bolder;
+    color: #a8a2d1;
+}
+
+.mtk4.mtki {
+    font-style: normal;
+}
+
+/* Chỉnh sidebar */
+.monaco-workbench
+    .activitybar
+    > .content
+    :not(.monaco-menu)
+    > .monaco-action-bar
+    .action-item.checked
+    .active-item-indicator:before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    border-left: none; /* Bỏ border-left */
+    border-radius: 50px;
+    background-image: linear-gradient(
+        180deg,
+        #407cff,
+        #da8bff,
+        #407cff,
+        #da8bff,
+        #407cff
+    );
+    background-size: 100% 400%;
+    background-clip: border-box;
+    animation: borderGradient 9s linear infinite;
+}
+
+.monaco-workbench
+    .activitybar
+    > .content
+    :not(.monaco-menu)
+    > .monaco-action-bar
+    .badge
+    .badge-content {
+    position: absolute;
+    top: 24px;
+    right: 8px;
+    font-size: 9px;
+    font-weight: 600;
+    min-width: 8px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 20px;
+    text-align: center;
+
+    background-image: linear-gradient(
+        -45deg,
+        /* Góc chéo */ #407cff 0%,
+        #da8bff 25%,
+        #407cff 50%,
+        #da8bff 75%,
+        #407cff 100%
+    );
+    background-size: 200% 400%; /* Giữ chiều rộng 200% để gradient chéo rõ hơn, chiều cao 400% để di chuyển dọc */
+    animation: gradientAnimation 5s linear infinite,
+        macOSBounce 2.5s ease-in-out infinite; /* Animation nảy kiểu macOS */
+}
+
+/* Chỉnh scrollbar */
+.slider {
+    overflow: auto;
+    border-radius: 15px !important;
+    background-color: rgb(218, 139, 255, 0.5) !important;
+    transition: all 0.1s ease;
+}
+
+/* chỉnh sidebar */
+.monaco-tl-twistie:before {
+    transition: transform 0.3s ease-in-out;
+}
+
+.monaco-tl-twistie.collapsed:before {
+    transform: rotate(-90deg);
+}
+
+.action-item.icon > .action-label {
+    transition: transform 0.2s ease-in-out; /* Hiệu ứng chuyển động mượt mà trong 0.5 giây */
+    transform: scale(1); /* Vị trí ban đầu */
+}
+
+.action-item.icon > .action-label:hover {
+    transform: scale(1.1);
+}
+
+/* Tùy chỉnh hiệu ứng cho nội dung folder */
+.monaco-tl-row::before {
+    /* Thiết lập transition cho thuộc tính max-height */
+    transition: transform 0.3s ease-out;
+}
+
+@keyframes macOSBounce {
+    0% {
+        transform: translateY(3px); /* Bắt đầu ở vị trí gốc */
+    }
+    50% {
+        transform: translateY(-3px); /* Nảy lên một lần */
+    }
+    100% {
+        transform: translateY(3px); /* Quay về vị trí gốc */
+    }
+}
+
+@keyframes macOSBounce1 {
+    0% {
+        transform: translateY(2px); /* Bắt đầu ở vị trí gốc */
+    }
+    50% {
+        transform: translateY(-2px); /* Nảy lên một lần */
+    }
+    100% {
+        transform: translateY(2px); /* Quay về vị trí gốc */
+    }
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 50% 0%; /* Bắt đầu ở giữa theo chiều ngang, trên cùng theo chiều dọc */
+    }
+    100% {
+        background-position: 50% 100%; /* Di chuyển đến giữa theo chiều ngang, dưới cùng theo chiều dọc */
+    }
+}
+
+@keyframes borderGradient {
+    0% {
+        background-position: 0% 0%; /* Bắt đầu ở bên trái */
+    }
+    100% {
+        background-position: 0% 400%;
+    }
+}
+
+.monaco-workbench
+    .pane-composite-part
+    > .title
+    > .composite-bar-container
+    > .composite-bar
+    > .monaco-action-bar
+    .badge
+    .badge-content {
+    background-image: linear-gradient(
+        -45deg,
+        /* Góc chéo */ #407cff 0%,
+        #da8bff 25%,
+        #407cff 50%,
+        #da8bff 75%,
+        #407cff 100%
+    );
+    background-size: 200% 400%; /* Giữ chiều rộng 200% để gradient chéo rõ hơn, chiều cao 400% để di chuyển dọc */
+    animation: gradientAnimation 5s linear infinite,
+        macOSBounce1 2.5s ease-in-out infinite; /* Animation nảy kiểu macOS */
+}
+
+.monaco-workbench
+    .part.statusbar
+    > .items-container
+    > .statusbar-item.remote-kind {
+    background-image: linear-gradient(
+        -45deg,
+        /* Góc chéo */ #407cff 0%,
+        #da8bff 25%,
+        #407cff 50%,
+        #da8bff 75%,
+        #407cff 100%
+    );
+    background-size: 200% 400%; /* Giữ chiều rộng 200% để gradient chéo rõ hơn, chiều cao 400% để di chuyển dọc */
+    animation: gradientAnimation 5s linear infinite;
+}
